@@ -1,14 +1,16 @@
 """Application configuration. """
-from fucntools import lru_cache
-from pydentic import SecretStr,Field
+from functools import lru_cache
+
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class seetings(BaseSettings):
+class Settings(BaseSettings):
     model_config = SettingsConfigDict(
              env_file=".env",
              env_file_encoding="utf-8",
              case_sensitive=False,
+             extra="ignore",
 )
     app_name: str = " Open Agent"
     app_version: str = "0.1.0"
@@ -24,7 +26,7 @@ class seetings(BaseSettings):
     # LLM
     # LLM
     groq_api_key: SecretStr
-    groq_model: str = "openai/gpt-oss-120b"
+    groq_model: str = "llama-3.3-70b-versatile"
 
     llm_temperature: float = Field(
         default=0.2,
@@ -45,8 +47,8 @@ class seetings(BaseSettings):
 
 @lru_cache()
 
-def get_settings() -> seetings:
+def get_settings() -> Settings:
     """Get application settings."""
-    return seetings()
+    return Settings()
       
 

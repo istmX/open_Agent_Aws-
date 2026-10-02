@@ -22,6 +22,7 @@ app = FastAPI(
     version=__version__,
     debug=settings.debug,
     lifespan=lifespan,
+
 )
 
 

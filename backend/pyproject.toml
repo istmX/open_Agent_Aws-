@@ -17,6 +17,7 @@ dependencies = [
     "langchain",
     "langchain-core",
     "langchain-community",
+    "langchain-groq",
     "groq",
 
     "qdrant-client",
@@ -34,8 +35,9 @@ dependencies = [
     "asyncpg",
 ]
 
-[project.scripts]
-open-agent-aws = "backend:main"
+[tool.uv.build-backend]
+module-name = "open_agent"
+module-root = "src"
 
 [build-system]
 requires = ["uv_build>=0.12.22,<0.13.0"]

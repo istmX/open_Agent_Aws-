@@ -7,6 +7,7 @@ langgraph
 langchain
 langchain-core
 langchain-community
+langchain-groq
 groq
 
 qdrant-client
