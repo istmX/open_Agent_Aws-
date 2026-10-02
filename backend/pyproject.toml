@@ -1,0 +1,42 @@
+[project]
+name = "open-agent-aws"
+version = "0.1.0"
+description = "Autonomous AI computer-use agent running on AWS"
+readme = "README.md"
+requires-python = ">=3.14"
+authors = [
+    { name = "Aryan", email = "xparyan68@gmail.com" }
+]
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic",
+    "pydantic-settings",
+
+    "langgraph",
+    "langchain",
+    "langchain-core",
+    "langchain-community",
+    "groq",
+
+    "qdrant-client",
+    "sentence-transformers",
+
+    "playwright",
+
+    "httpx",
+    "aiohttp",
+    "python-dotenv",
+    "tenacity",
+    "orjson",
+
+    "sqlalchemy",
+    "asyncpg",
+]
+
+[project.scripts]
+open-agent-aws = "backend:main"
+
+[build-system]
+requires = ["uv_build>=0.12.22,<0.13.0"]
+build-backend = "uv_build"
