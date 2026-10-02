@@ -1,4 +1,5 @@
-from open_agent.tools.base_tool import BaseTool
-all = [
-    BaseTool
-]
+"""Tool interfaces exposed by the package."""
+
+from open_agent.tools.base import Tool
+
+__all__ = ["Tool"]
