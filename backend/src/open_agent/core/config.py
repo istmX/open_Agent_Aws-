@@ -1,17 +1,18 @@
-"""Application configuration. """
+"""Application configuration."""
+
 from functools import lru_cache
 
-from pydantic import Field, SecretStr
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-             env_file=".env",
-             env_file_encoding="utf-8",
-             case_sensitive=False,
-             extra="ignore",
-)
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore",
+    )
     app_name: str = " Open Agent"
     app_version: str = "0.1.0"
 
@@ -22,6 +23,15 @@ class Settings(BaseSettings):
     # Server
     host: str = "0.0.0.0"
     port: int = 8000
+
+    # Database. Neon URLs may be supplied with either postgres:// or
+    # postgresql://; the async layer normalizes them to postgresql+asyncpg.
+    database_url: str = "postgresql+asyncpg:///open_agent"
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def use_local_database_when_unset(cls, value: object) -> object:
+        return value or "postgresql+asyncpg:///open_agent"
 
     # LLM
     # LLM
@@ -46,9 +56,6 @@ class Settings(BaseSettings):
 
 
 @lru_cache()
-
 def get_settings() -> Settings:
     """Get application settings."""
     return Settings()
-      
-

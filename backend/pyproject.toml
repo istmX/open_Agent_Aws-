@@ -31,9 +31,16 @@ dependencies = [
     "tenacity",
     "orjson",
 
-    "sqlalchemy",
+    "sqlalchemy>=2.0,<3",
     "asyncpg",
+    "alembic>=1.13",
+    "aiosqlite",
+    "pytest",
+    "pytest-asyncio",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.uv.build-backend]
 module-name = "open_agent"
