@@ -13,7 +13,8 @@ class Agent:
         name: str,
         role: str,
         llm: LLMProvider,
-        tools: list[Tool]
+        tools: list[Tool],
+        description: str | None = None,
     ) -> None:
         """Initialize an agent."""
 
@@ -22,3 +23,4 @@ class Agent:
         self.role = role
         self.llm = llm
         self.tools = tools
+        self.description = description

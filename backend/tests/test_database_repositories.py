@@ -162,8 +162,8 @@ async def test_foreign_keys_and_agent_delete_preserves_audit_history(session):
     )
     await session.flush()
     with pytest.raises(IntegrityError):
-        await agent_repo.delete("u", agent.id)
-    await session.rollback()
+        async with session.begin_nested():
+            await agent_repo.delete("u", agent.id)
     assert await session.get(Task, task.id) is not None
     assert await session.get(AgentRun, run.id) is not None
     assert await session.scalar(__import__("sqlalchemy").select(Message)) is not None

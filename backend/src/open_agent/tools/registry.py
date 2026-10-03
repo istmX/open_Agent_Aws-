@@ -28,6 +28,18 @@ class ToolRegistry:
         except KeyError as exc:
             raise KeyError(f"Tool with name {name!r} is not registered.") from exc
 
+    def get_optional(self, name: str) -> Tool | None:
+        """Return the tool named ``name`` or None if not registered."""
+        return self._tools.get(name)
+
+    def __contains__(self, name: str) -> bool:
+        """Check if a tool named ``name`` is registered."""
+        return name in self._tools
+
+    def __len__(self) -> int:
+        """Return the count of registered tools."""
+        return len(self._tools)
+
     def list_tools(self) -> list[Tool]:
         """Return registered tools in registration order."""
 
@@ -40,3 +52,4 @@ class ToolRegistry:
             return self._tools.pop(name)
         except KeyError as exc:
             raise KeyError(f"Tool with name {name!r} is not registered.") from exc
+
