@@ -23,3 +23,7 @@ orjson
 
 sqlalchemy
 asyncpg
+alembic>=1.13
+aiosqlite
+pytest
+pytest-asyncio

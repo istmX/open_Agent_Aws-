@@ -1,4 +1,4 @@
-"""Typed data carried through an agent's future execution."""
+"""Typed data carried through an agent's execution."""
 
 from dataclasses import dataclass, field
 from typing import Literal
@@ -6,16 +6,27 @@ from typing import Literal
 from langchain_core.messages import BaseMessage
 
 
-AgentStatus = Literal["pending", "running", "completed", "failed"]
+AgentStatus = Literal[
+    "pending",
+    "running",
+    "completed",
+    "failed",
+]
 
 
 @dataclass
 class AgentState:
     """Represent the current execution state of an agent."""
 
+    user_id: str
     agent_id: str
-    task: str
+    task_id: str
+    run_id: str
+    prompt: str
+
     messages: list[BaseMessage] = field(default_factory=list)
+
     current_step: int = 0
     status: AgentStatus = "pending"
+
     error: str | None = None
