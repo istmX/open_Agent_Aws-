@@ -13,6 +13,19 @@ class AgentError(OpenAgentError):
     """Base exception for agent-related failures."""
 
 
+class AgentExecutionError(AgentError):
+    """Raised when an agent execution fails critically."""
+
+
+class AgentTimeoutError(AgentError):
+    """Raised when an agent execution exceeds configured timeout limit."""
+
+
+class AgentStepLimitExceededError(AgentError):
+    """Raised when an agent exceeds the maximum allowed execution steps."""
+
+
+
 class ToolError(OpenAgentError):
     """Base exception for tool execution failures."""
 

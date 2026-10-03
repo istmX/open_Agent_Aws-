@@ -6,13 +6,15 @@ def test_agent_initialization() -> None:
     name = "Test Agent"
     role = "Test Role"
     llm_provider = None  
+    tools = []
 
-    agent = Agent(agent_id=agent_id, name=name, role=role, llm=llm_provider)
+    agent = Agent(agent_id=agent_id, name=name, role=role, llm=llm_provider, tools=tools)
 
     assert agent.agent_id == agent_id
     assert agent.name == name
     assert agent.role == role
     assert agent.llm == llm_provider
+    assert agent.tools == tools
     print("All tests passed for Agent class initialization.")
     print("Agent ID:", agent.agent_id)
     print("Agent Name:", agent.name)
